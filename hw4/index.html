@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4</title>
+</head>
+
+<body>
+    <h2>HW4 - Atakan Yontar</h2>
+    <ul>
+
+    </ul>
+</body>
+<script>
+
+
+    async function getSuppliers() {
+        var suppliers = []
+
+        await fetch("https://northwind.vercel.app/api/suppliers")
+            .then(res => res.json())
+            .then(data => {
+                suppliers = data;
+            });
+        
+
+        return suppliers
+    }
+
+    getSuppliers()
+        .then(data => {
+            //** bir ul aç. Dışarıdan aldığın datayı FETCH ile içerisine doldur. Li içerisinde companyName yazacak
+            data.forEach(supplier => {
+                var liElement = document.createElement('li');
+                liElement.innerText = supplier.companyName
+                document.querySelector('ul').appendChild(liElement)
+            });
+
+            // ** Company Name M harfi ile başlayan supplier ları console a yaz
+            companiesWithM = data.filter((supplier) => supplier.companyName[0] === 'M')
+            console.log("List of suppliers that has the name starts with M", companiesWithM)
+            
+            //** Country Japan olan kaç Supplier var?
+            companiesFromJapan = data.filter((supplier) => supplier.address.country === "Japan")
+            console.log("The number of suppliers that are from Japan", companiesFromJapan.length)
+        })
+
+
+</script>
+
+</html>

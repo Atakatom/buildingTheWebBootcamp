@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>HW3</title>
+</head>
+
+<body>
+    <h2>HW3 - Q2 - Atakan Yontar</h2>
+
+    <div>
+      <div>
+        <label for="">Name</label>
+        <input type="text" id="name">
+      </div>
+    
+      <div>
+        <label for="">Unit Price</label>
+        <input type="text" id="unitPrice">
+      </div>
+    
+      <div>
+        <label for="">Units in Stock</label>
+        <input type="text" id="unitsInStock">
+      </div>
+    
+      <div>
+        <label for="">Category Id</label>
+        <input type="text" id="categoryId">
+      </div>
+    </div>
+    
+      <div>
+        <button onclick="addProduct()">Add</button>
+      </div>
+</body>
+<script>
+
+    function addProduct() {
+        var name = document.getElementById('name').value;
+        var unitPrice = document.getElementById('unitPrice').value;
+        var unitsInStock = document.getElementById('unitsInStock').value;
+        var categoryId = document.getElementById('categoryId').value;
+
+        var newProduct = {
+            name: name,
+            unitPrice: unitPrice,
+            unitsInStock: unitsInStock,
+            categoryId: categoryId
+        }
+
+        axios.post('https://northwind.vercel.app/api/products', newProduct)
+            .then(response => {
+                console.log(response.data);
+                console.log('Your product is added to our database!');
+            })
+    }
+
+</script>
+
+</html>

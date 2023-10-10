@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+
+    axios.get("https://northwind.vercel.app/api/orders")
+        .then(response => {
+
+            var customers = response.data;
+            var totalUsa = 0
+
+            customers.forEach(element => {
+                if(element.shipAddress.country === "USA"){
+                    totalUsa += 1;
+                }
+            });
+
+            console.log("total orders from USA:", totalUsa)
+
+        })
+
+</script>
+
+</html>
